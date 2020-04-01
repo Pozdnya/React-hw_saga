@@ -1,4 +1,4 @@
-import { NUMBERS } from "./type";
+import { NUMBERS } from "./types";
 
 const num = numbers => {
   return {

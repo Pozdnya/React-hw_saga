@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux';
-// import num from '../Redux/actions'
-// import NUMBERS from '../Redux/types'
+import num from '../Redux/actions'
 import { bindActionCreators } from 'redux';
 
 const mapStateToProps = state => {
@@ -11,22 +10,30 @@ const mapStateToProps = state => {
 	};
 };
 
-const mapDispatchToProps = dispatch =>{
-	console.log(dispatch)
-	return {
-		// num: bindActionCreators(num, dispatch)
-	}
-}
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+	num: num
+}, dispatch)
 
 const Input = (props) => {
-	
+	console.log(props)
+
+	const [number,setNumber]= useState('')
+
+	const inputHandler = (event) => {
+		setNumber(event.target.value)
+	}
+
+	const onclickHandler = () => {
+		props.num(number)
+	}
+
 	return (
 		<>
 			<div>
 				<label htmlFor="inp">
-					<input id="inp" type="number" />
+					<input id="inp" type="number" onChange={inputHandler} />
 				</label>
-				<button>Click</button>
+				<button onClick={onclickHandler}>Click</button>
 				<p>{props.value}</p>
 			</div>
 		</>
